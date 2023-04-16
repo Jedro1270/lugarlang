@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:lugarlang/classes/route.dart';
 
 class BottomInfoSheet extends StatelessWidget {
+  final LugarLangRoute route;
+
   const BottomInfoSheet({
     super.key,
+    required this.route,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 100,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -37,17 +41,17 @@ class BottomInfoSheet extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 150,
+            height: 75,
             child: ListView(
-              children: const <Widget>[
+              children: <Widget>[
                 ListTile(
-                  title: Text('Route Name'),
-                  subtitle: Text('UNGKA - LA PAZ VIA CPU - ISATU LOOP'),
+                  title: const Text('Route Name'),
+                  subtitle: Text(route.name),
                 ),
-                ListTile(
-                  title: Text('Fare'),
-                  subtitle: Text('PHP 15.00'),
-                ),
+                // ListTile(
+                //   title: const Text('Fare'),
+                //   subtitle: Text('₱ ${route.fare}'),
+                // ),
               ],
             ),
           ),

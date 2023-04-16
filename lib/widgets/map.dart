@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:lugarlang/assets/routes.dart';
+import 'package:lugarlang/classes/route.dart';
 import 'package:lugarlang/widgets/bottom-info-sheet.dart';
 
 class LugarLangMap extends StatefulWidget {
@@ -21,26 +23,24 @@ class _LugarLangMapState extends State<LugarLangMap> {
 
   void _initializeRoutes() {
     setState(() {
-      Polyline polyline = Polyline(
-        polylineId: const PolylineId('line1'),
-        color: Colors.red,
-        width: 5,
-        points: const [
-          LatLng(10.713298, 122.534174),
-          LatLng(10.716382, 122.536901),
-          LatLng(10.713473, 122.539056),
-        ],
-        consumeTapEvents: true,
-        onTap: () {
-          Scaffold.of(context).showBottomSheet<void>(
-            (BuildContext context) {
-              return const BottomInfoSheet();
-            },
-          );
-        },
-      );
+      for (LugarLangRoute route in routes) {
+        Polyline polyline = Polyline(
+          polylineId: PolylineId(route.name),
+          color: route.color,
+          width: 3,
+          points: route.points,
+          consumeTapEvents: true,
+          onTap: () {
+            Scaffold.of(context).showBottomSheet<void>(
+              (BuildContext context) {
+                return BottomInfoSheet(route: route);
+              },
+            );
+          },
+        );
 
-      polylines.add(polyline);
+        polylines.add(polyline);
+      }
     });
   }
 
