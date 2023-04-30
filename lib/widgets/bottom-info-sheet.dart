@@ -12,7 +12,7 @@ class BottomInfoSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 90,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -41,17 +41,17 @@ class BottomInfoSheet extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 75,
+            height: 70,
             child: ListView(
               children: <Widget>[
                 ListTile(
-                  title: const Text('Route Name'),
-                  subtitle: Text(route.name),
+                  title: Text(route.name),
+                  leading: Icon(
+                    Icons.directions_bus,
+                    color: route.color,
+                    size: 30.0,
+                  ),
                 ),
-                // ListTile(
-                //   title: const Text('Fare'),
-                //   subtitle: Text('₱ ${route.fare}'),
-                // ),
               ],
             ),
           ),

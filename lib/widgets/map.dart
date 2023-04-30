@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:lugarlang/assets/routes.dart';
-import 'package:lugarlang/classes/route.dart';
-import 'package:lugarlang/widgets/bottom-info-sheet.dart';
+import 'package:lugarlang/classes/kml.dart';
 
 class LugarLangMap extends StatefulWidget {
   final void Function(GoogleMapController)? onMapCreated;
@@ -21,24 +19,11 @@ class LugarLangMap extends StatefulWidget {
 class _LugarLangMapState extends State<LugarLangMap> {
   final Set<Polyline> polylines = {};
 
-  void _initializeRoutes() {
-    setState(() {
-      for (LugarLangRoute route in routes) {
-        Polyline polyline = Polyline(
-          polylineId: PolylineId(route.name),
-          color: route.color,
-          width: 3,
-          points: route.points,
-          consumeTapEvents: true,
-          onTap: () {
-            Scaffold.of(context).showBottomSheet<void>(
-              (BuildContext context) {
-                return BottomInfoSheet(route: route);
-              },
-            );
-          },
-        );
+  void _initializeRoutes() async {
+    Map<PolylineId, Polyline> testPolylines = await KML.loadAllKML(context);
 
+    setState(() {
+      for (Polyline polyline in testPolylines.values) {
         polylines.add(polyline);
       }
     });
